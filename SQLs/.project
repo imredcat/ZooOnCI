@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>zoocms</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>org.jkiss.dbeaver.DBeaverNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Diagrams/zoocms.mwb</name>
+			<type>1</type>
+			<location>//Users/jmlee/DEVEL/GitHub/ZooOnCI/SQLs/zoocms.mwb</location>
+		</link>
+	</linkedResources>
+</projectDescription>
