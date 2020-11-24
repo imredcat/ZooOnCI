@@ -15,8 +15,13 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * Router Setup
  * --------------------------------------------------------------------
  */
+/*
 $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Home');
+*/
+$routes->setDefaultNamespace('Zoo\Main\Controllers');
+$routes->setDefaultController('Main');
+
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -48,4 +53,23 @@ $routes->get('/', 'Home::index');
 if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 {
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+}
+
+
+/**
+ * HMVC Use Modules -> https://timbrownlaw.com/blog/codeigniter-4-hmvc-just-like-in-codeigniter-3-but-simpler/
+ * $routes->get('/admin', '\App\Modules\Admin\Controllers\Admin::index');
+ * $routes->get('/admin/(:any)', '\App\Modules\Admin\Controllers\Admin::$1');
+ */
+
+/**
+ * --------------------------------------------------------------------
+ * HMVC Routing include configs
+ * --------------------------------------------------------------------
+ */
+
+foreach (glob(ZOOPATH . '*', GLOB_ONLYDIR) as $item_dir) {
+	if (file_exists($item_dir . '/Config/Routes.php')) {
+			require_once($item_dir . '/Config/Routes.php');
+	}
 }

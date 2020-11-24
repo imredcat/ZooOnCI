@@ -70,4 +70,9 @@ class Paths
 	 * is used when no value is provided to `Services::renderer()`.
 	 */
 	public $viewDirectory = __DIR__ . '/../Views';
+
+	/**
+	 * ZooCMS 모듈 경로
+	 */
+	public $zooDirectory = __DIR__ . '/../../zoo';
 }

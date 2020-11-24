@@ -42,6 +42,7 @@ class Autoload extends AutoloadConfig
 	public $psr4 = [
 		APP_NAMESPACE => APPPATH, // For custom app namespace
 		'Config'      => APPPATH . 'Config',
+		'Zoo'					=> ROOTPATH . 'zoo',
 	];
 
 	/**
@@ -63,4 +64,18 @@ class Autoload extends AutoloadConfig
 	 * @var array
 	 */
 	public $classmap = [];
+
+	public function __construct()
+	{
+		parent::__construct();
+		foreach (glob(ZOOPATH . '*', GLOB_ONLYDIR) as $item_dir) {
+			if (file_exists($item_dir . '/Config/classmap.php')) {
+				require_once($item_dir . '/Config/classmap.php');
+				if (count($classmap) > 0) {
+					$this->classmap = array_merge($this->classmap, $classmap);
+					unset($classmap);
+				}
+			}
+		}
+	}
 }
