@@ -1,0 +1,353 @@
+#page_header {
+    width: 100%;
+    background: #EFEFEF;
+    padding: 10px 30px;
+    color: #000000;
+    border-bottom: 1px solid #b1b1b1;
+}
+
+#page_title {
+    float: left;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+#page_breadcrumb {
+    float: left;
+    font-size: 12px;
+    margin-left: 20px;
+}
+
+#page_breadcrumb:before {
+    content: " : ";
+}
+
+#page_breadcrumb span {
+    display: inline-block;
+    margin: 0px;
+    margin-right: -4px;
+}
+
+#page_breadcrumb span:before {
+    content: " / ";
+    display: inline-block;
+    margin: 0px 5px;
+}
+
+#page_breadcrumb span:first-child:before {
+    content: "";
+}
+
+#page_utility_tools {
+    float: right;
+}
+
+section#page_content {
+    margin: 20px;
+}
+
+.lists-search-form {
+    padding: 0px;
+    position: relative;
+    border: 1px solid #dddddd;
+    margin-bottom: 10px
+}
+
+.lists-search-form>fieldset {
+    position: relative;
+    display: block;
+}
+
+.lists-search-form>fieldset>legend {
+    display: block;
+    padding: 5px;
+    background: #84aff0;
+    color: #ffffff;
+}
+
+.lists-search-form table tr th,
+.lists-search-form table tr td {
+    padding: 5px;
+}
+
+.lists-search-form label {
+    font-size: 11px;
+}
+
+.lists-search-form label span {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.lists-search-form label span:after {
+    content: ":"
+}
+
+.board-lists-head>div {
+    margin-right: 10px;
+}
+
+.board-lists-body>table {
+    width: 100%;
+    border: 1px solid #dddddd;
+}
+
+.board-lists-body>table>thead>tr>th,
+.board-lists-body>table>tbody>tr>td {
+    padding: 5px;
+    text-align: center;
+}
+
+.board-lists-body>table>thead>tr>th {
+    text-align: center;
+    background: #829bca;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.board-lists-body>table>tbody>tr>td {
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+}
+
+.board-lists-body>table>tbody>tr>td>div:first-child {
+    margin-bottom: 2px;
+}
+
+.board-lists-body>table>tbody>tr>td.list-td-title div {
+    margin-bottom: 5px;
+}
+
+.direction-stat-lists {
+    line-height: 1.2rem;
+}
+
+.direction-stat-lists span {
+    display: inline-block;
+    min-width: 42px;
+    margin: 0px;
+    text-align: center;
+    color: #37c200;
+}
+
+.direction-stat-lists span.dir-stat-stay {
+    color: #37c200
+}
+
+.direction-stat-lists span.dir-stat-ok {
+    color: #006eff
+}
+
+.direction-stat-lists span.dir-stat-over {
+    color: #c22264
+}
+
+.direction-stat-lists span.dir-stat-overok {
+    color: #6c339b
+}
+
+#board-view-head {
+    border: 1px solid #5f94c5;
+    border-top-width: 5px;
+    padding: 0px;
+    margin: 0px;
+    background-color: #c0d6e9;
+}
+
+#board-view-head h1 {
+    margin: 0px;
+    padding: 5px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#board-view-head>.board-view-docinfo {
+    background: #ffffff;
+    padding: 10px;
+    border-bottom: 1px solid #dddddd;
+}
+
+#board-view-head>.board-view-docinfo table {
+    width: 100%;
+}
+
+#board-view-head>.board-view-docinfo table>tbody>tr>th,
+#board-view-head>.board-view-docinfo table>tbody>tr>td {
+    border-bottom: 1px solid #dddddd;
+    padding: 5px;
+}
+
+#board-view-head>.board-view-docinfo table>tbody>tr:last-child>th,
+#board-view-head>.board-view-docinfo table>tbody>tr:last-child>td {
+    border-bottom-width: 0px;
+}
+
+.board-view-attfile-lists a.a-attfile {
+    display: inline-block;
+    padding: 2px;
+    border: 1px solid #dddddd;
+    border-radius: 2px;
+    margin: 2px 4px;
+    width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #000000;
+    background: #ffffff;
+}
+
+.board-view-attfile-max-7 a.a-attfile:nth-child(n+7) {
+    display: none;
+}
+
+#board-view-head .lists-search-form {
+    background: #ffffff;
+    margin: 0px;
+}
+
+.board-view-lists-wrap {
+    margin-top: 10px;
+}
+
+.board-view-lists-total {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.board-view-item {
+    border-top: 1px solid #84aff0;
+    margin-bottom: 10px;
+}
+
+.board-view-item-head {
+    background: #ececec;
+}
+
+.board-view-item-head>dl {
+    margin: 0px;
+    padding: 0px;
+    display: block;
+    border-bottom: 1px solid #dddddd;
+}
+
+.board-view-item-head>dl>dt {
+    background: #bdd6fa;
+    padding: 5px;
+}
+
+.board-view-item-listno {
+    min-width: 40px;
+    display: inline-block;
+    text-align: center;
+}
+
+.board-view-item-date {
+    color: #363636;
+    font-weight: 400;
+    text-align: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    min-width: 120px;
+}
+
+.board-view-item-subject {
+    font-size: 12px;
+}
+
+.board-view-item-mem:before {
+    content: "-";
+    margin: 0px 5px;
+}
+
+.icon-bf:before {
+    content: "";
+    display: inline-block;
+    margin-right: 2px;
+    vertical-align: middle;
+    background-position: 0px -1px;
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-mem:before {
+    background-image: url("../icons/user.png");
+    color: #000000;
+}
+
+.board-view-item-head>dl>dd {
+    padding: 5px 5px 0px 52px;
+}
+
+.board-view-item-moreinfo {
+    margin: 0px;
+}
+
+.board-view-item-moreinfo dt {
+    width: 60px;
+    display: inline-block;
+    padding: 3px;
+}
+
+.board-view-item-moreinfo dd {
+    display: inline-block;
+}
+
+.board-view-item-content {
+    padding: 10px 10px 10px 55px;
+}
+
+.board-view-item-foot {
+    background-color: #ececec;
+    border-bottom: 1px solid #dddddd;
+}
+
+.board-view-item-foot>div {
+    padding: 5px;
+}
+
+.btn-link {
+    display: inline-block;
+    padding: 2px 5px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #808080;
+}
+
+.btn-link:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#page_content.writeform-wrap {
+    margin: 0px;
+}
+
+.writeform-body {
+    width: calc(100% - 200px);
+    height: calc(100vh - 34px);
+    padding: 5px;
+    border: 1px solid #dddddd;
+}
+
+.writeform-body-tools {
+    background: #dddddd;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.writeform-aside {
+    width: 200px;
+    height: calc(100vh - 34px);
+    padding: 5px;
+}
+
+.tbl-form {
+    width: 100%
+}
+
+.tbl-form input[type='text'] {
+    width: 100%
+}

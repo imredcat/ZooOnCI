@@ -1,0 +1,33 @@
+.fieldset{
+    width:100%;
+    border:1px solid var(--gray);
+    border-radius:5px;
+    overflow:hidden;
+    margin-bottom:5px;
+}
+.fieldset > .legend{
+    margin:0px 0px 5px;
+    background-color:var(--gray-light);
+    color:var(--dark);
+    padding:5px;
+    font-size:0.8rem;
+}
+
+.lists-header{
+    padding:5px 5px 10px 5px;;
+    background-color:var(--light);
+
+}
+
+
+
+table.table-fit {
+    width: auto !important;
+    table-layout: auto !important;
+}
+table.table-fit thead th, table.table-fit tfoot th {
+    width: auto !important;
+}
+table.table-fit tbody td, table.table-fit tfoot td {
+    width: auto !important;
+}

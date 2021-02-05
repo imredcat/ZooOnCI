@@ -1,0 +1,268 @@
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+body {
+  font-size: 0.875rem;
+  background-color: #ecf0f3;
+}
+
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
+
+/*
+  * Sidebar
+  */
+
+.sidebar {
+  position: fixed;
+  /*
+  top: 0;
+  bottom: 0;
+  */
+  left: 0;
+  width: 200px;
+  z-index: 100;
+  /* Behind the navbar */
+  padding: 8px 0 0;
+  /* Height of navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+  background-color: #dcdcdc;
+}
+
+.sidebar-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 48px);
+  max-width: 200px;
+  padding-top: 0.5rem;
+  /*
+  overflow-x: hidden;
+  overflow-y: auto; 
+  */
+  /* Scrollable contents if viewport is shorter than content. */
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+  .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+}
+
+.sidebar .nav-item {
+  position: relative;
+}
+
+.sidebar .nav-item:hover {
+  background-color: #adadad;
+  color: #fff;
+}
+
+.sidebar .nav-item:hover > .nav-subitem {
+  display: block;
+}
+
+.sidebar .nav-item:hover .feather {
+  color: #fff;
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #fff;
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #999;
+}
+
+.sidebar .nav-link.active {
+  color: #ffffff;
+  background-color: #868686;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: #ffffff;
+}
+
+.sidebar-heading {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+/*
+  * Navbar
+  */
+
+.navbar {
+  min-width: 1024px;
+}
+
+.navbar-brand {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, 0.25);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
+  max-width: 200px;
+  min-width: 200px;
+}
+
+.navbar .navbar-toggler {
+  top: 0.25rem;
+  right: 1rem;
+}
+
+.navbar .form-control {
+  padding: 0.75rem 1rem;
+  border-width: 0;
+  border-radius: 0;
+}
+
+.form-control-dark {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.form-control-dark:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+}
+
+main {
+  margin-left: 200px;
+  padding-bottom: 50px;
+  min-width: 700px;
+  font-size: 0.688rem;
+}
+
+#body {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  min-width: 1024;
+}
+
+#page_name {
+  color: #dddddd;
+  font-size: 12px;
+  padding-left: 10px;
+  font-size: 12px;
+  flex-grow: 3;
+}
+
+#page_name span:first-child {
+  font-size: 16px;
+  color: #ffffff;
+  margin-right: 20px;
+}
+
+#page_name span:nth-child(n + 3)::before {
+  content: ">";
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.main-body {
+  position: relative;
+  height: calc(100vh - 48px);
+}
+
+#sidebarMenu > .sidebar-sticky {
+  position: sticky;
+  top: auto;
+}
+
+#sidebarMenu {
+  background-color: #313a46;
+  font-size: 0.875rem;
+}
+
+.nav-subitem {
+  position: absolute;
+  list-style: none;
+  display: none;
+  left: 90%;
+  min-width: 200px;
+  top: 0px;
+  background: #adadad;
+  border: 0px solid #adadad;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px #929292;
+  overflow: hidden;
+}
+
+.nav-subitem ol {
+  list-style: none;
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  min-width: 200px;
+}
+
+.nav-subitem ol li a {
+  padding: 0.5rem 1rem;
+  display: block;
+  color: #ffffff;
+}
+
+.nav-subitem ol li:hover {
+  background: linear-gradient(90deg, #adadad, #d1d1d1);
+}
+
+.nav-subitem ol li:hover a {
+  color: #ffffff;
+}
+
+.nav-subitem ol li a:hover {
+  text-decoration: none;
+}
+
+.main-body > .col-lg-10 {
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  max-width: calc(100vw - 216px);
+}
+
+@media (min-width: 992px) {
+  .main-body > .col-lg-10 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: calc(100vw - 216px);
+  }
+}
+
+@media (min-width: 768px) {
+  .main-body > .col-lg-10 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: calc(100vw - 216px);
+  }
+}
+
+#page_name_content {
+  font-size: 1.2rem;
+}
+
+.wrap-with-tabs-content {
+  background: #ffffff;
+}

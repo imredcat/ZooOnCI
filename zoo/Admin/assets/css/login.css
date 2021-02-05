@@ -1,0 +1,71 @@
+.login_wrap {
+    margin: 50px auto;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: #f5f5f5;
+}
+
+body {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #ecf0f3;
+}
+
+.form-signin-wrap {
+    display: block;
+    width: 430px;
+    height: 400px;
+    padding: 60px 35px 35px 35px;
+    border-radius: 40px;
+    background: #ecf0f3;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
+    margin: auto;
+}
+
+.login-input {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 10px 20px;
+    font-size: 18px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    outline: none;
+    box-shadow: -4px -4px 10px rgba(255, 255, 255, 1), inset 4px 4px 10px rgba(0, 0, 0, 0.05), inset -4px -4px 10px rgba(255, 255, 255, 1), 4px 4px 10px rgba(0, 0, 0, 0.05);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.login-input::placeholder {
+    color: #cccccc;
+    text-align: center;
+}
+
+.login-input[type='submit'] {
+    padding: 15px 20px;
+    margin-top: 20px;
+    border: 1px solid #f1f1f1;
+    box-shadow: -4px -4px 10px rgba(255, 255, 255, 1), inset 4px 4px 10px rgba(255, 255, 255, 1), inset -4px -4px 10px rgba(0, 0, 0, 0.1), 4px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-input[type='submit']:active,
+.login-input[type='submit']:focus {
+    padding: 15px 20px;
+    margin-top: 20px;
+    border: none;
+    outline: none;
+    box-shadow: inset -4px -4px 6px rgba(255, 255, 255, 1), inset 4px 4px 6px rgba(0, 0, 0, 0.2);
+}

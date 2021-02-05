@@ -569,3 +569,5 @@ nb-configuration.xml
 # Sql tests
 SQLs/
 SQLs/*
+
+.history

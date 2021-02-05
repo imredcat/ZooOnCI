@@ -1,10 +1,9 @@
 <?php
 namespace App\Libraries;
 
-//use MatthiasMullie\Minify as Minify;
-use \Zoo\Config\Services as ZooServices;
+use \Zoo\Common\Config\Services as ZooServices;
 
-// composer 사용 안할 경우 https://github.com/matthiasmullie/minify/issues/83 
+// composer 사용 안할 경우 https://github.com/matthiasmullie/minify/issues/83
 $path = APPPATH.'/Libraries';
 require_once $path . '/minify/src/Minify.php';
 require_once $path . '/minify/src/CSS.php';
@@ -31,16 +30,25 @@ use \MatthiasMullie\Minify as Minify;
  *  -> minify -> 스크립트 배열
  */
 
-
 class LibMinifyJsCss
 {
+    public $arr_is_force = [];
     public function __construct()
     {
+        if (!is_dir(DIR_CACHE_JSCSS)) {
+            @mkdir(DIR_CACHE_JSCSS,0777);
+        }
+        if (!is_dir(DIR_CACHE_JSCSS.'js')) {
+            @mkdir(DIR_CACHE_JSCSS.'js',0777);
+        }
+        if (!is_dir(DIR_CACHE_JSCSS.'css')) {
+            @mkdir(DIR_CACHE_JSCSS.'css',0777);
+        }
     }
     /**
      * js, css 파일을 가져온다.
      */
-    public function loadjscss($arr_jscss=array(),$withmodule=1)
+    public function loadjscss($arr_jscss=array(), $withmodule=1)
     {
         $this->gcCaches();
         $withmodule = $withmodule?$withmodule:0;
@@ -52,14 +60,12 @@ class LibMinifyJsCss
             $arr_js_mod = $this->getModeulJsCss('js');    // 모듈 기본 js
         }
         
-        
         $arr_css = $this->getCustomJsCss($arr_jscss, 'css');
         $arr_css['union'] = array_merge($arr_css_mod, $arr_css['union']);
         $arr_js = $this->getCustomJsCss($arr_jscss, 'js');
         $arr_js['union'] = array_merge($arr_js_mod, $arr_js['union']);
         //$arr_css = array_merge($this->getModeulJsCss('css'), $this->getCustomJsCss($arr_jscss, 'css'));
         //$arr_js = array_merge($this->getModeulJsCss('js'), $this->getCustomJsCss($arr_jscss, 'js'));
-        
         $arr_css_path = $this->getSrcUrl($arr_css, 'css');
         $arr_js_path = $this->getSrcUrl($arr_js, 'js');
         return ['css'=>$arr_css_path,'js'=>$arr_js_path];
@@ -69,17 +75,17 @@ class LibMinifyJsCss
     public function getModeulJsCss($tp = '')
     {
         static $arr_jscss = array();
+        
         if (count($arr_jscss) > 0) {
-            return $arr_jscss[$tp]?:$arr_jscss;
+            return $tp?$arr_jscss[$tp]:$arr_jscss;
         }
-
         $routes = \Config\Services::routes();
         $uri = \Config\Services::uri();
         $arr_request_uri = explode("/", $uri->getPath());
         $arr_js = [];
         $arr_css = [];
-        $jscss_path = "_mod_";
-        $jscss_dir = DMGPATH;
+        $jscss_path =   "_mod_";
+        $jscss_dir =    ZOOPATH;
         $jscss_fname = "";
         foreach ($arr_request_uri as $key => $value) {
             if (!$value) {
@@ -143,12 +149,12 @@ class LibMinifyJsCss
                 if (in_array($_file, $_loaded) || !$this->getRealPath($_file)) {
                     continue;
                 }
-                $_fileinfo = pathinfo($_file);
                 
+                $_fileinfo = pathinfo($_file);
                 if ($_fileinfo['extension'] == 'css') {
                     if (in_array('alone', $arr_val)) {
                         $arr['css']['alone'][] = $_file;
-                    }elseif (in_array('nominify', $arr_val) || strstr($_fileinfo['basename'],'.min.')) {
+                    } elseif (in_array('nominify', $arr_val) || strstr($_fileinfo['basename'], '.min.')) {
                         $arr['css']['nominify'][] = $_file;
                     } else {
                         $arr['css']['union'][] = $_file;
@@ -160,15 +166,18 @@ class LibMinifyJsCss
                         $arr['js']['defer'][] = $_file;
                     } elseif (in_array('async', $arr_val)) {
                         $arr['js']['async'][] = $_file;
-                    }elseif (in_array('nominify', $arr_val) || strstr($_fileinfo['basename'],'.min.')) {
+                    } elseif (in_array('nominify', $arr_val) || strstr($_fileinfo['basename'], '.min.')) {
                         $arr['js']['nominify'][] = $_file;
                     } else {
-                        if (strstr($_fileinfo['basename'],'.min.')) {
+                        if (strstr($_fileinfo['basename'], '.min.')) {
                             $arr['js']['alone'][] = $_file;
                         } else {
                             $arr['js']['union'][] = $_file;
                         }
                     }
+                }
+                if (in_array('force', $arr_val)) {
+                    $arr_is_force[] = $_file;
                 }
                 $_loaded[] = $_file;
             }
@@ -183,10 +192,9 @@ class LibMinifyJsCss
         if (file_exists($file_path)) {
             return $file_path;
         }
-        
         $arr_path = array_values(array_diff(explode("/", $file_path), array('',null)));
         if ($arr_path[0] == '_mod_') {
-            $arr_path[0] = DIR_DMG; //dmg/Config/Constants.php
+            $arr_path[0] = DIR_ZOO; //zoo/Common/Config/Constants.php
             $file_path = join("/", $arr_path);
         } else {
             $file_path = rtrim(FCPATH, '/').'/'.ltrim($file_path, '/');
@@ -202,7 +210,7 @@ class LibMinifyJsCss
         $arr_realpath = is_array($arr_realpath)?$arr_realpath:[$arr_realpath];
         $path_called = is_array($path_called)?$path_called:[$path_called];
         if ($tagtype == 'css') {
-            //$minifier = DmgServices::minifycss();
+            //$minifier = ZooServices::minifycss();
             //$minifier = new \MatthiasMullie\Minify\CSS();
             // composer 안될 경우
             $minifier = new Minify\CSS();
@@ -211,27 +219,25 @@ class LibMinifyJsCss
             $minifier = new Minify\JS();
         }
         foreach ($arr_realpath as $key => $path) {
-            
             $file_nm = pathinfo($path, PATHINFO_BASENAME);
-            $pathinfo_called = rtrim(pathinfo($path_called[$key],PATHINFO_DIRNAME),'/').'/';
+            $pathinfo_called = rtrim(pathinfo($path_called[$key], PATHINFO_DIRNAME), '/').'/';
             $content = file_get_contents($path);
-            $content = str_replace('url("./','url("'.$pathinfo_called,$content);
-            $content = str_replace("url('./","url(".$pathinfo_called,$content);
-            $content = str_replace("url(./","url(".$pathinfo_called,$content);
-            $_paths = explode('/',$pathinfo_called);
-            for($i = count($_paths);$i > 0;$i--){
-                $a_p = array_pad([],$i,'../');
-                $_target_path = join($a_p);
-                $_dist_path = join('/',array_slice($_paths, 0, $i));
-                $content = str_replace($_target_path,$_dist_path,$content);
-            }
             
-            $content = "\n/*! loaded {$path_called[$key]} = {$file_nm}*/\n"
-                        . $content
-                        . "\n\n/*! loaded {$path_called[$key]} = {$file_nm}*/\n\n\n";
+            $content = str_replace('url("./', 'url("'.$pathinfo_called, $content);
+            $content = str_replace("url('./", "url(".$pathinfo_called, $content);
+            $content = str_replace("url(./", "url(".$pathinfo_called, $content);
+            $_paths = explode('/', $pathinfo_called);
+            for ($i = count($_paths);$i > 0;$i--) {
+                $a_p = array_pad([], $i, '../');
+                $_target_path = join($a_p);
+                $_dist_path = join('/', array_slice($_paths, 0, $i));
+                $content = str_replace($_target_path, $_dist_path, $content);
+            }
+            $content = "\n/*! loaded {$path_called[$key]} = {$file_nm}*/\n{$content}\n\n/*! loaded {$path_called[$key]} = {$file_nm}*/\n\n\n";
             $minifier->add($content);
         }
         
+
         $minifier->minify(DIR_CACHE_JSCSS.$tagtype.'/'.$cache_file_nm);
         $cache_mtime = filemtime(DIR_CACHE_JSCSS.$tagtype.'/'.$cache_file_nm);
         return [$cache_file_nm,$cache_mtime];
@@ -248,8 +254,12 @@ class LibMinifyJsCss
         $arr_path_called = $arr_tag_src;
         $mtime_last_original = $arr_tag_src;
         $mtime_last_original['union'] = 0;
+
         foreach ($arr as $tagtype => $arr_items) {
             foreach ($arr_items as $key => $file) {
+                if (! $file) {
+                    continue;
+                }
                 $file_path_real = $this->getRealPath($file);
                 if (!$file_path_real) {
                     continue;
@@ -274,7 +284,8 @@ class LibMinifyJsCss
             if ($tagtype == 'union') {
                 $cache_file_nm = 'cached_'.md5(serialize($arr_path_called[$tagtype]));
                 $cache_file_nm = $cache_file_nm.'.'.$filetype;
-                if (file_exists(DIR_CACHE_JSCSS.$filetype.'/'.$cache_file_nm)) {
+                $_arr_is_force = array_diff($this->arr_is_force, $arr_path_called[$tagtype]);
+                if (file_exists(DIR_CACHE_JSCSS.$filetype.'/'.$cache_file_nm) && count($_arr_is_force) == count($arr_path_called[$tagtype])) {
                     $cache_mtime = filemtime(DIR_CACHE_JSCSS.$filetype.'/'.$cache_file_nm);
                     if ($mtime_last_original[$tagtype] <= $cache_mtime) {
                         $arr_tag_src[$tagtype][] = [$cache_file_nm, $cache_mtime];
@@ -286,13 +297,14 @@ class LibMinifyJsCss
                 foreach ($arr_path_real[$tagtype] as $key => $path_real) {
                     $path_called = $arr_path_called[$tagtype][$key];
                     $file_nm_called = pathinfo($path_called, PATHINFO_BASENAME);
-                    if (strstr($file_nm_called,'.min.') || $tagtype == 'nominify') {
+                    
+                    if (strstr($file_nm_called, '.min.') || $tagtype == 'nominify') {
                         $cache_mtime = filemtime($path_real);
                         $arr_tag_src[$tagtype][] = [$arr_path_called[$tagtype][$key],$cache_mtime];
                         continue;
                     }
                     $cache_file_nm = 'cached_'.$file_nm_called.'.'.$filetype;
-                    if (file_exists(DIR_CACHE_JSCSS.$filetype.'/'.$cache_file_nm)) {
+                    if (file_exists(DIR_CACHE_JSCSS.$filetype.'/'.$cache_file_nm) && !in_array($path_real, $this->arr_is_force)) {
                         $cache_mtime = filemtime(DIR_CACHE_JSCSS.$filetype.'/'.$cache_file_nm);
                         if ($mtime_last_original[$tagtype][$key] <= $cache_mtime) {
                             $arr_tag_src[$tagtype][] = [$cache_file_nm, $cache_mtime];
@@ -308,20 +320,20 @@ class LibMinifyJsCss
 
     public function gcCaches()
     {
-      foreach(['css','js'] as $filetype){
-        $dir_caches = DIR_CACHE_JSCSS.$filetype.'/';
-        if ($dh = opendir($dir_caches)) {
-          while (($filejs = readdir($dh)) !== false) {
-              if ($filejs == "." || $filejs == "..") {
-                  continue;
-              }
-              $filetm = filemtime($dir_caches.$filejs);
-              if (time() - $filetm > WEEK) {
-                  unlink($dir_caches.$filejs);
-              }
-          }
-          closedir($dh);
+        foreach (['css','js'] as $filetype) {
+            $dir_caches = DIR_CACHE_JSCSS.$filetype.'/';
+            if ($dh = opendir($dir_caches)) {
+                while (($filejs = readdir($dh)) !== false) {
+                    if ($filejs == "." || $filejs == "..") {
+                        continue;
+                    }
+                    $filetm = filemtime($dir_caches.$filejs);
+                    if (time() - $filetm > WEEK) {
+                        unlink($dir_caches.$filejs);
+                    }
+                }
+                closedir($dh);
+            }
         }
-      }
     }
 }

@@ -1,0 +1,15 @@
+@import '/assets/css/normalize.css';
+@import '/assets/bootstrap4.5/css/bootstrap.min.css';
+@import '/assets/bootstrap4.5/css/bootstrap-custom.css';
+/*
+https://fontawesome.com/v4.7.0/icons/
+*/
+@import '/assets/fontawesome/css/font-awesome.min.css';
+
+/*
+https://iconscout.com/unicons
+*/
+
+body{
+    font-size:0.688rem
+}

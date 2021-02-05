@@ -1,0 +1,132 @@
+div#body_wrap {
+    padding: 0px;
+}
+
+.main_brd_lists {
+    width: 100%;
+    min-width: 1000px;
+    padding: 20px 10px 10px 15px;
+}
+
+.brd_item_wrap {
+    float: left;
+    padding-right: 5px;
+    margin-bottom: 10px;
+    width: 50%;
+}
+
+.brd_item_wrap a {
+    color: #000000;
+}
+
+.brd_item_wrap h3 {
+    font-weight: 700;
+    padding: 5px;
+    margin: 0px 1px 0px 0px;
+}
+
+.brd_item_wrap h3 span {
+    margin-left: 5px;
+}
+
+.brd_item_wrap table {
+    width: 100%;
+}
+
+.brd_item_wrap table tr th {
+    background: #009CCD;
+    padding: 5px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 11px;
+}
+
+.brd_item_wrap table tr td {
+    padding: 5px;
+    font-size: 11px;
+    text-align: center;
+    border-bottom: 1px solid #dddddd;
+}
+
+.main_favo.brd_item_wrap {
+    float: none;
+    margin: 0px 0px 10px 0px;
+    width: 100%;
+    clear: both;
+    margin-right: 0px;
+}
+
+.main_favo.brd_item_wrap h3 {
+    padding: 5px;
+    background: #009CCD;
+    margin: 0px;
+    color: #ffffff;
+}
+
+.main_favo>.main_favo_lists {
+    padding: 5px;
+}
+
+.main_favo>.main_favo_lists a {
+    display: inline-block;
+    width: 19%;
+    padding: 5px;
+    border: 1px solid #9e9e9e;
+    border-radius: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 2px 0px;
+    color: #000000;
+    background: #ffffff;
+    box-shadow: inset -2px -2px 2px #dddddd;
+}
+
+.main_favo>.main_favo_lists a:hover {
+    text-decoration: none;
+    background: #91C9F7
+}
+
+#page_header {
+    width: 100%;
+    background: #EFEFEF;
+    padding: 8px 30px;
+    color: #000000;
+    border-bottom: 1px solid #b1b1b1;
+}
+
+#page_title {
+    float: left;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+#page_breadcrumb {
+    float: left;
+    font-size: 12px;
+    margin-left: 20px;
+}
+
+#page_breadcrumb:before {
+    content: " : ";
+}
+
+#page_breadcrumb span {
+    display: inline-block;
+    margin: 0px;
+    margin-right: -4px;
+}
+
+#page_breadcrumb span:before {
+    content: " / ";
+    display: inline-block;
+    margin: 0px 5px;
+}
+
+#page_breadcrumb span:first-child:before {
+    content: "";
+}
+
+#page_utility_tools {
+    float: right;
+}

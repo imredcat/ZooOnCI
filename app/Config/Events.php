@@ -50,3 +50,5 @@ Events::on('pre_system', function () {
 		Services::toolbar()->respond();
 	}
 });
+
+include ROOTPATH.'zoo/Common/Config/Events.php';

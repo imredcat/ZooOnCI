@@ -1,0 +1,10 @@
+.main-body > .col-lg-10{
+    max-width:100% !important;
+    flex:auto !important;
+}
+#body.popup-win{position: inherit;}
+.popup-win main{margin-left:auto;padding-right:0px !important;padding-left: 0px !important;}
+
+.main-body.row{margin-right:0px;margin-left:0px;}
+.popup-win .navbar{padding:10px; width:100%;min-width:100%;}
+.popup-win main{min-width:100%;}

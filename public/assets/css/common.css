@@ -1,0 +1,99 @@
+/*
+* body 폰트 시스템 폰트를 사용한다.
+*/
+
+.btn-group-xs>.btn,
+.btn-xs {
+    padding: .3rem .35rem !important;
+    font-size: .875rem !important;
+    line-height: .5 !important;
+    border-radius: .2rem !important;
+}
+
+.form-control-xs {
+    height: calc(1em + .375rem + 2px) !important;
+    padding: .125rem .25rem !important;
+    font-size: .75rem !important;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
+
+.input-xs {
+    height: 22px;
+    padding: 2px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    /* If Placeholder of the input is moved up, rem/modify this. */
+    border-radius: 3px;
+}
+
+:root {
+    --header-bg: #fafbfc!important;
+    --header-color: #000000;
+    --nav-bg: #d6d6d6;
+    --nav-color: #000000;
+    --nav-sub-bg: #ffffff;
+    --nav-sub-color: #000000;
+    --laytout-border-color: #e1e4e8;
+}
+
+body * {
+    /*font-family: 'Nanum Gothic', NanumGothic, "나눔고딕", dotum, "돋움","Microsoft YaHei", "微软雅黑", Arial, sans-serif, "Malgun Gothic", Roboto, "Helvetica Neue", "Noto Sans";*/
+    font-family: "Malgun Gothic", "Nanum Gothic", NanumGothic, 나눔고딕, dotum, 돋움, "Microsoft YaHei", 微软雅黑, Arial, sans-serif;
+    font-size: 11px;
+}
+
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+    background: #ffffff;
+    line-height: 1rem;
+    width: 100%;
+    height: 100%
+}
+
+#page_utility_tools>a:before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: bottom;
+    background-position: left top;
+    background-repeat: no-repeat;
+}
+
+.btn-help:before {
+    background-image: url("../icons/help.png");
+}
+
+.btn-addto-scrap:before {
+    background-image: url("../icons/folder_table.png");
+}
+
+.btn-addto-memo:before {
+    background-image: url("../icons/page_white_add.png");
+}
+
+.btn-addto-dashboard:before {
+    background-image: url("../icons/application_home.png");
+}
+
+.btn-addto-checklist:before {
+    background-image: url("../icons/tick.png");
+}
+
+.btn-addto-schedule:before {
+    background-image: url("../icons/date_add.png");
+}
+
+table.table-fit {
+    width: auto !important;
+    table-layout: auto !important;
+}
+table.table-fit thead th, table.table-fit tfoot th {
+    width: auto !important;
+}
+table.table-fit tbody td, table.table-fit tfoot td {
+    width: auto !important;
+}

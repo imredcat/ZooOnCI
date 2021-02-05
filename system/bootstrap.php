@@ -87,12 +87,7 @@ if (! defined('TESTPATH'))
 	define('TESTPATH', realpath($paths->testsDirectory) . DIRECTORY_SEPARATOR);
 }
 
-/**
- * ZOO MODULE 경로
- */
-if (! defined('ZOOPATH')) {
-	define('ZOOPATH', realpath($paths->zooDirectory) . DIRECTORY_SEPARATOR);
-}
+
 
 /*
  * ---------------------------------------------------------------
