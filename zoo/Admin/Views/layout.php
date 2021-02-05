@@ -42,19 +42,18 @@
                     <span class='nav-nm'>Dashboard</span>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link <?=$arr_request_uri[1]=="members"?"active":""?>" href="/admin/members/">
+                <li class="nav-item <?=$arr_request_uri[1]=="members"?"active":""?>">
+                  <a class="nav-link" href="/admin/members/">
                     <i class="fa fa-id-card-o fa-fw fa-lg"></i>
-
                     <span class='nav-nm'>회원 관리</span>
                   </a>
                   <div class="nav-subitem">
-                    <ol>
-                      <li><a href="/admin/members/">회원 목록</a></li>
-                      <li><a href="/admin/members/department/">회사,부서 설정</a></li>
-                      <li><a href="/admin/members/position/">직급/직책 설정</a></li>
-                      <li><a href="/admin/managers/">관리자 설정</a></li>
-                    </ol>
+                    <dl>
+                      <dt>회원관리</dt>
+                      <dd><a href="/admin/members/">회원목록</a></dd>
+                      <dd><a href="/admin/members/groups/">회원그룹</a></dd>
+                      <dd><a href="/admin/members/admins/">관리자</a></dd>
+                    </dl>
                   </div>
                 </li>
                 <li class="nav-item">

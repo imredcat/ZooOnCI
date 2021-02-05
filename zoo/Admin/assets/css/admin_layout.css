@@ -266,3 +266,7 @@ main {
 .wrap-with-tabs-content {
   background: #ffffff;
 }
+
+.nav-nm {
+  display: none;
+}

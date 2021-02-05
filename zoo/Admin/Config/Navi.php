@@ -1,4 +1,4 @@
-<?php
+<?php 
 $arr_navi = [
   'admin'   => ['대시보드',
     'index'   => 'Dashboard'
