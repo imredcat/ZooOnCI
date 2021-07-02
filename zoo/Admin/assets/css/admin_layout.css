@@ -35,10 +35,10 @@ body {
   bottom: 0;
   */
   left: 0;
-  width: 50px;
+  width: 200px;
   z-index: 100;
   /* Behind the navbar */
-  padding: 8px 0 0;
+  padding: 0px 0 0;
   /* Height of navbar */
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
   background-color: #dcdcdc;
@@ -49,8 +49,8 @@ body {
   position: sticky;
   top: 0;
   height: calc(100vh - 48px);
-  max-width: 200px;
-  padding-top: 0.5rem;
+  max-width: 50px;
+  padding-top: 30px;
   /*
   overflow-x: hidden;
   overflow-y: auto; 
@@ -68,39 +68,74 @@ body {
 .sidebar .nav-item {
   position: relative;
 }
-
-.sidebar .nav-item:hover {
-  background-color: #adadad;
-  color: #fff;
+.sidebar .nav-item,
+.sidebar .nav-item .nav-icon {
+  color: #ffffff;
 }
 
-.sidebar .nav-item:hover > .nav-subitem {
+.sidebar .nav-item:hover,
+.sidebar .nav-item:hover .nav-icon {
+  background-color: #eaeaea;
+  color: rgb(73, 73, 73);
+}
+.nav-item:hover ~ li {
+  display: none !important;
+}
+
+.sidebar .nav-item > dl {
+  /*display: none;*/
+  position: absolute;
+  right: 0px;
+}
+.sidebar .nav-item > dl > dt {
+  padding: 5px;
+  background-color: #69768e;
+  font-weight: 700;
+  color: #ffffff;
+}
+.sidebar .nav-item:hover > dl {
   display: block;
 }
 
-.sidebar .nav-item:hover .feather {
-  color: #fff;
-}
-
-.sidebar .nav-link {
+.sidebar .nav-icon {
   font-weight: 500;
-  color: #fff;
+  padding: 0.813rem 0.5rem;
+  text-align: center;
 }
-
-.sidebar .nav-link .feather {
+/*
+.sidebar .nav-icon .feather {
   margin-right: 4px;
   color: #999;
 }
-
-.sidebar .nav-link.active {
-  color: #ffffff;
-  background-color: #868686;
+*/
+.sidebar .nav-item.active {
+  position: static;
 }
-
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
+.sidebar .nav-item.active,
+.sidebar .nav-item.active .nav-icon {
+  background-color: #eaeaea;
+  color: rgb(73, 73, 73);
+}
+.sidebar .nav-item.active .nav-subitem {
+  display: block;
+}
+.sidebar .nav-item.active .nav-subitem dt {
+  height: 30px;
+  background-color: #69768e;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 1rem;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*
+.sidebar .nav-icon:hover .feather,
+.sidebar .nav-icon.active .feather {
   color: #ffffff;
 }
+*/
 
 .sidebar-heading {
   font-size: 0.75rem;
@@ -190,13 +225,14 @@ main {
 #sidebarMenu > .sidebar-sticky {
   position: sticky;
   top: auto;
+  background-color: #313a46;
 }
 
 #sidebarMenu {
-  background-color: #313a46;
+  background-color: #eaeaea;
   font-size: 0.875rem;
 }
-
+/*
 .nav-subitem {
   position: absolute;
   list-style: none;
@@ -210,8 +246,21 @@ main {
   box-shadow: 2px 2px 3px #929292;
   overflow: hidden;
 }
+*/
 
-.nav-subitem ol {
+.nav-subitem {
+  position: absolute;
+  list-style: none;
+  display: none;
+  left: 100%;
+  min-width: 150px;
+  top: 0px;
+  background: #eaeaea;
+  border: 0px solid #adadad;
+  overflow: hidden;
+}
+
+.nav-subitem dd {
   list-style: none;
   display: block;
   margin: 0px;
@@ -219,21 +268,21 @@ main {
   min-width: 200px;
 }
 
-.nav-subitem ol li a {
+.nav-subitem dd a {
   padding: 0.5rem 1rem;
   display: block;
   color: #ffffff;
 }
 
-.nav-subitem ol li:hover {
+.nav-subitem dd:hover {
   background: linear-gradient(90deg, #adadad, #d1d1d1);
 }
 
-.nav-subitem ol li:hover a {
+.nav-subitem dd:hover a {
   color: #ffffff;
 }
 
-.nav-subitem ol li a:hover {
+.nav-subitem dd a:hover {
   text-decoration: none;
 }
 

@@ -41,7 +41,7 @@ if (!$a && $is_debug == 0) {
 
 
 $ROOTDIR = rtrim($_SERVER['DOCUMENT_ROOT'], '/').'/';
-$DMGDIR = $ROOTDIR."../dmg/";
+$ZOODIR = $ROOTDIR."../zoo/";
 $dir_caches = $ROOTDIR."../writable/cache/cssjs/";
 
 if (!is_dir($dir_caches)) {
@@ -54,9 +54,17 @@ if (!is_dir($dir_caches)) {
     chmod($dir_caches, 0777);
 }
 
-echo "/* -- Cached File -- */\n";
+
 if (strpos($src,'cached_') === 0) {
+    echo "/* -- Cached File -- */\n";
     $cachefile = $dir_caches.$src;
+}else if(strpos($src,'_mod_') === 0){
+  $arr_path = array_values(array_diff(explode("/", $src), array('',null)));
+  if ($arr_path[0] == '_mod_') {
+    echo "/* -- Mod File {$src} -- */\n";
+    $arr_path[0] = $ZOODIR;
+    $cachefile = str_replace('//','/',join("/", $arr_path));
+  }
 }else {
     $cachefile = $ROOTDIR.$src;
 }

@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Content-type" type="equiv" content="text/html; charset=utf-8" />
     <meta name="X-UA-Compatible" type="equiv" content="IE=edge" />
-
     <link href="/assets/css/normalize.css" rel="stylesheet">
     <script src="/assets/jquery/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="/assets/bootstrap5/css/bootstrap-reboot.min.css">
@@ -15,7 +14,12 @@
     <script src="/assets/bootstrap5/js/bootstrap.bundle.min.js"></script>
     <link href="/assets/css/common.css" rel="stylesheet">
     <?php
-    loadjscss($html_head_css_js);
+    /**
+     * production 이면 캐싱된 loadJscss 사용
+     * 아니면 <link,  <script 사용 
+     * $html_head_css_js 배열|스트링
+     */
+    loadJscss($html_head_css_js,0);
     ?>
   </head>
 
@@ -26,7 +30,7 @@
         <div id="page_name"><span><?=$page_nm?></span><span><?=join("</span><span>", $arr_page_nm??[])?></span></div>
         <ul class="navbar-nav px-3">
           <li class="nav-item text-nowrap">
-            <a class="nav-link" href="/admin/logout"><span data-feather="power"></span> Logout</a>
+            <a class="nav-link nav-icon" href="/admin/logout"><span data-feather="power"></span> Logout</a>
           </li>
         </ul>
       </nav>
@@ -34,42 +38,83 @@
       <div id="main-wrap" class="container-fluid">
         <div class="row main-body">
           <nav id="sidebarMenu" class="d-md-block sidebar collapse show">
-            <div class="sidebar-sticky pt-3">
+            <div class="sidebar-sticky sidebar_triggers">
               <ul class="nav flex-column">
-                <li class="nav-item">
-                  <a class="nav-link <?=isset($arr_request_uri[1])?"":"active"?>" href="/admin">
-                    <i class="fa fa-dashboard fa-fw fa-lg"></i>
-                    <span class='nav-nm'>Dashboard</span>
-                  </a>
-                </li>
-                <li class="nav-item <?=$arr_request_uri[1]=="members"?"active":""?>">
-                  <a class="nav-link" href="/admin/members/">
-                    <i class="fa fa-id-card-o fa-fw fa-lg"></i>
-                    <span class='nav-nm'>회원 관리</span>
-                  </a>
-                  <div class="nav-subitem">
-                    <dl>
-                      <dt>회원관리</dt>
-                      <dd><a href="/admin/members/">회원목록</a></dd>
-                      <dd><a href="/admin/members/groups/">회원그룹</a></dd>
-                      <dd><a href="/admin/members/admins/">관리자</a></dd>
-                    </dl>
-                  </div>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/admin/menus">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-menu-button-wide-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" d="M14 7H2a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zM2 6a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H2z" />
-                      <path fill-rule="evenodd" d="M15 11H1v-1h14v1zM2 12.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM1.5 0A1.5 1.5 0 0 0 0 1.5v2A1.5 1.5 0 0 0 1.5 5h13A1.5 1.5 0 0 0 16 3.5v-2A1.5 1.5 0 0 0 14.5 0h-13zm1 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm9.927.427l.396.396a.25.25 0 0 0 .354 0l.396-.396A.25.25 0 0 0 13.396 2h-.792a.25.25 0 0 0-.177.427z" />
+                <li class="nav-item <?=isset($arr_request_uri[1])?"":"active"?>" id='nv_dashboard'>
+                  <a href='/admin/' class="nav-link nav-icon" href="/admin">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-speedometer" viewBox="0 0 16 16">
+                      <path d="M8 2a.5.5 0 0 1 .5.5V4a.5.5 0 0 1-1 0V2.5A.5.5 0 0 1 8 2zM3.732 3.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 8a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 8zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 7.31A.91.91 0 1 0 8.85 8.569l3.434-4.297a.389.389 0 0 0-.029-.518z" />
+                      <path fill-rule="evenodd" d="M6.664 15.889A8 8 0 1 1 9.336.11a8 8 0 0 1-2.672 15.78zm-4.665-4.283A11.945 11.945 0 0 1 8 10c2.186 0 4.236.585 6.001 1.606a7 7 0 1 0-12.002 0z" />
                     </svg>
-                    <span class='nav-nm'>메뉴 관리</span>
                   </a>
+                  <dl class='nav-subitem' for='nv_dashboard'>
+                    <dt>Dashboard</dt>
+                  </dl>
+                </li>
+                <li class="nav-item <?=isset($arr_request_uri[1])=='siteconfig'?"active":""?>" id="nv_preferences">
+                  <a href="/admin/preferences" class="nav-link nav-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                      <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                    </svg>
+                  </a>
+                  <dl class='nav-subitem' for='nv_preferences'>
+                    <dt>기본설정</dt>
+                    <dd>사이트 설정</dd>
+                    <dd>메뉴관리</dd>
+                  </dl>
+                </li>
+                <li class="nav-item <?=$arr_request_uri[1]=="members"?"active":""?>" id='nv_member'>
+                  <a href="/admin/members/" class="nav-link nav-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                      <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                      <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                      <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                    </svg>
+                  </a>
+                  <dl class='nav-subitem' for='nv_member'>
+                    <dt>회원관리</dt>
+                    <dd><a href="/admin/members/">회원목록</a></dd>
+                    <dd><a href="/admin/members/groups/">회원그룹</a></dd>
+                    <dd><a href="/admin/members/admins/">설정하기</a></dd>
+                  </dl>
+                </li>
+                <li class="nav-item" id='nv_naviconfig'>
+                  <a class="nav-link nav-icon" href="/admin/menus">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-diagram-3-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zm-6 8A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm6 0A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm6 0a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1z" />
+                    </svg>
+                  </a>
+                  <dl class='nav-subitem' for='nv_naviconfig'>
+                    <dt>메뉴관리</dt>
+                    <dd><a href="/admin/members/">메뉴관리</a></dd>
+                    <dd><a href="/admin/members/admins/">설정하기</a></dd>
+                  </dl>
+                </li>
+                <li class="nav-item" id='nv_board'>
+                  <a class="nav-link nav-icon" href="/admin/boards">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg>
+                  </a>
+                  <dl class='nav-subitem' for='nv_naviconfig'>
+                    <dt>게시판</dt>
+                    <dd><a href="/admin/members/">게시판</a></dd>
+                    <dd><a href="/admin/members/admins/">설정하기</a></dd>
+                  </dl>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/admin/boards">
-                    <span data-feather="database"></span>
-                    <span class='nav-nm'>게시판 관리</span>
+                  <a class="nav-link nav-icon" href="/admin/boards">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg>
                   </a>
+                  <dl class='nav-subitem' for='nv_naviconfig'>
+                    <dt>페이지설정</dt>
+                    <dd><a href="/admin/members/">페이지설정</a></dd>
+                    <dd><a href="/admin/members/admins/">설정하기</a></dd>
+                  </dl>
                 </li>
               </ul>
             </div>
@@ -84,7 +129,7 @@
       </div>
     </div>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js" ></script>-->
-    <!--<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
 
     <?php

@@ -1,9 +1,9 @@
 <?php namespace Zoo\Admin\Controllers;
 
-use Zoo\Common\Controllers\BaseController as BaseController;
 use Zoo\Admin\Controllers\AdminController as AdminController;
+use Zoo\Common\Controllers\BaseController as BaseController;
 
-class Admin extends AdminController
+class Preferences extends AdminController
 {
   public function index()
   {
@@ -17,10 +17,13 @@ class Admin extends AdminController
     );
 
     $minifyjscs = \Zoo\Common\Config\Services::libminifyjscss();
-    $minifyjscs->useOriginal();
     $data['html_head_css_js'] = $minifyjscs->loadjscss($data['html_head_css_js']);
     
     return $view->setData($data, 'raw')
                 ->render('Zoo\Admin\Views\layout', $options, $saveData);
+  }
+  public function info()
+  {
+    echo "adf";
   }
 }
